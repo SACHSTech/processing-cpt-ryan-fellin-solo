@@ -7,9 +7,10 @@ public class Sketch extends PApplet {
   float circlex = 200;
   float vely = 0;
    float velx = 0;
-   float ground = (height - 75);
+   float ground = (height - 95);
    double grav = (float)0.5;
    boolean[] keyboardkey = new boolean[255];
+   boolean jumping = false;
 	
   /**
    * Called once at the beginning of execution, put your size all in this method
@@ -50,12 +51,26 @@ public class Sketch extends PApplet {
     circlex = circlex + velx;
     circley = circley + vely;
     // lower edge collision detection
-   if(vely < ground){
-    vely += grav;
+    if (circley > height - 90) {
+      vely = 0 ;
+      jumping = false;
+
+    } else {
+      vely = (vely + 1);
+    }
+   
+   if(keyboardkey[(int)'w']){
+      System.out.println("w pressed");
+      if(!jumping){
+      jumping = true;
+      vely = (vely = (-15));
+      }
+      
    }
-   else{
-    vely = 0;
-   }
+   if(keyboardkey[(int)'a']){
+    System.out.println("a pressed");
+    circlex -= 3;
+ }
   }
   public void combometer(){
     
