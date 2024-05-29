@@ -9,6 +9,7 @@ public class Sketch extends PApplet {
    float velx = 0;
    float ground = (height - 75);
    double grav = (float)0.5;
+   boolean[] keyboardkey = new boolean[255];
 	
   /**
    * Called once at the beginning of execution, put your size all in this method
@@ -59,12 +60,17 @@ public class Sketch extends PApplet {
   public void combometer(){
     
   }
-
+//Thanks to Caleb for the help with keyboard input using arrays!
   public void keyPressed(){
-    if(key == 'w'){
-      vely = -5;
+    if((int)key != 65535){
+    keyboardkey[(int)key] = true;
+    System.out.println((int)key);
     }
-    //if(key)
   }
+  public void keyReleased(){
+    if((int)key != 65535){
+    keyboardkey[(int)key] = false;
+  }
+}
 } 
 
