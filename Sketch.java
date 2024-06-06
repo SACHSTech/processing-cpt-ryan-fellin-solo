@@ -11,13 +11,18 @@ public class Sketch extends PApplet {
    double grav = (float)0.5;
    boolean[] keyboardkey = new boolean[255];
    boolean jumping = false;
+   boolean dodgeroll = false;
+   boolean iframe = false;
+   boolean hit = false;
+   boolean left;
+   boolean right;
 	
   /**
    * Called once at the beginning of execution, put your size all in this method
    */
   public void settings() {
 	// put your size call here
-    size(400, 400);
+    size(800, 400);
    
     
   }
@@ -46,7 +51,7 @@ public class Sketch extends PApplet {
   
   // define other methods down here.
   public void player(){
-    //vely = vely + 1;
+    //vely = vely + 1;F
     image(player, circlex, circley);
     circlex = circlex + velx;
     circley = circley + vely;
@@ -70,8 +75,30 @@ public class Sketch extends PApplet {
    if(keyboardkey[(int)'a']){
     System.out.println("a pressed");
     circlex -= 3;
+    left = true;
+    right = !right;
  }
+ if(keyboardkey[(int)'d']){
+  System.out.println("d pressed");
+  circlex += 3;
+  left = false;
+  right = true;
+}
+if(keyboardkey[(int)'l']){
+  System.out.println("dodgeroll");
+ 
+//  if(left){
+    velx = velx + 20;
+  //}
+  //if(right){
+    velx = velx - 20;
+  //}
+  //dodgeroll = !dodgeroll;
   }
+}
+  
+
+  
   public void combometer(){
     
   }
