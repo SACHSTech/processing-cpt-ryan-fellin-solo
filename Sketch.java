@@ -1,3 +1,5 @@
+import java.sql.Time;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -6,36 +8,38 @@ public class Sketch extends PApplet {
   float circley = 200;
   float circlex = 200;
   float vely = 0;
-   float velx = 0;
-   float ground = (height - 95);
-   double grav = (float)0.5;
-   boolean[] keyboardkey = new boolean[255];
-   boolean jumping = false;
-   boolean dodgeroll = false;
-   boolean iframe = false;
-   boolean hit = false;
-   boolean left;
-   boolean right;
-   long time = System.currentTimeMillis();
-   int dodgedelay = 3000;
-	
+  float velx = 0;
+  float ground = (height - 95);
+  float startDash;
+  float dashTime;
+  float dashSpeed;
+  double grav = (float) 0.5;
+  boolean[] keyboardkey = new boolean[255];
+  boolean jumping = false;
+  boolean dodgeroll = false;
+  boolean iframe = false;
+  boolean hit = false;
+  boolean left;
+  boolean right;
+  long time = System.currentTimeMillis();
+  int dodgedelay = 3000;
+
   /**
    * Called once at the beginning of execution, put your size all in this method
    */
   public void settings() {
-	// put your size call here
+    // put your size call here
     size(800, 400);
-   
-    
+
   }
 
-  /** 
-   * Called once at the beginning of execution.  Add initial set up
+  /**
+   * Called once at the beginning of execution. Add initial set up
    * values here i.e background, stroke, fill etc.
    */
   public void setup() {
     background(210, 255, 173);
-   player = loadImage("80X20PLACEHOLDER.png"); 
+    player = loadImage("80X20PLACEHOLDER.png");
   }
 
   /**
@@ -43,87 +47,92 @@ public class Sketch extends PApplet {
    */
   public void draw() {
     background(210, 255, 173);
-	  player();
+    player();
 
+    // sample code, delete this stuff
+    ellipse(width / 2, height / 2, 50, 50);
 
-	// sample code, delete this stuff
-  ellipse(width/2, height/2, 50, 50);
-  
   }
-  
+
   // define other methods down here.
-  public void player(){
-    //vely = vely + 1;F
+  public void player() {
+    // vely = vely + 1;F
     image(player, circlex, circley);
     circlex = circlex + velx;
     circley = circley + vely;
     // lower edge collision detection
     if (circley > height - 90) {
-      vely = 0 ;
+      vely = 0;
       jumping = false;
 
     } else {
       vely = (vely + 1);
     }
-   
-   if(keyboardkey[(int)'w']){
+
+    if (keyboardkey[(int) 'w']) {
       System.out.println("w pressed");
-      if(!jumping){
-      jumping = true;
-      vely = (vely = (-15));
+      if (!jumping) {
+        jumping = true;
+        vely = (vely = (-15));
       }
-      
-   }
-   if(keyboardkey[(int)'a']){
-    System.out.println("a pressed");
-    circlex -= 3;
-    left = true;
-    right = !right;
- }
- if(keyboardkey[(int)'d']){
-  System.out.println("d pressed");
-  circlex += 3;
-  left = false;
-  right = true;
-}
 
-if(keyboardkey[(int)'l']){
-  System.out.println("dodgeroll");
- if(!dodgeroll){
-  dodgeroll = true;
-  if(left){
-    circlex -= 10;
-    
-    
-  }
-  if(right){
-    circlex += 10;
-   
-  }
-  
+    }
+    if (keyboardkey[(int) 'a']) {
+      System.out.println("a pressed");
+      circlex -= 6;
+      left = true;
+      right = false;
+    }
+    if (keyboardkey[(int) 'd']) {
+      System.out.println("d pressed");
+      circlex += 6;
+      left = false;
+      right = true;
+    }
 
-}
-}
-if(time > dodgedelay + 1000){
-  dodgeroll = !dodgeroll;
-}
-  }  
+    if (keyboardkey[(int) 'l']) {
+      System.out.println("dodgeroll");
+      startDash = time;
+      if (!dodgeroll) {
+        dodgeroll = true;
+        if (left) {
+          circlex -= 90;
+          vely = 0;
 
-  
-  public void combometer(){
-    
+        }
+        if (right) {
+          circlex += 90;
+          vely = 0;
+
+        }
+
+      }
+    }
+    /* 
+    if (time > dodgedelay + 1000) {
+      dodgeroll = !dodgeroll;
+    }
+    */
   }
-//Thanks to Caleb for the help with keyboard input using arrays!
-  public void keyPressed(){
-    if((int)key != 65535){
-    keyboardkey[(int)key] = true;
-    System.out.println((int)key);
+
+  public void combometer() {
+
+  }
+
+  // Thanks to Caleb for the help with keyboard input using arrays!
+  public void keyPressed() {
+    if ((int) key != 65535) {
+      keyboardkey[(int) key] = true;
+      System.out.println((int) key);
     }
   }
-  public void keyReleased(){
-    if((int)key != 65535){
-    keyboardkey[(int)key] = false;
+
+  public void keyReleased() {
+    if((int) key == 'l'){
+    dodgeroll = false;
+    }
+    if ((int) key != 65535) {
+      keyboardkey[(int) key] = false;
+    }
   }
 }
-} 
-
