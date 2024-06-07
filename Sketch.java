@@ -16,6 +16,8 @@ public class Sketch extends PApplet {
    boolean hit = false;
    boolean left;
    boolean right;
+   long time = System.currentTimeMillis();
+   int dodgedelay = 3000;
 	
   /**
    * Called once at the beginning of execution, put your size all in this method
@@ -84,19 +86,26 @@ public class Sketch extends PApplet {
   left = false;
   right = true;
 }
+
 if(keyboardkey[(int)'l']){
   System.out.println("dodgeroll");
- 
-//  if(left){
-    velx = velx + 20;
-  //}
-  //if(right){
-    velx = velx - 20;
-  //}
-  //dodgeroll = !dodgeroll;
+ if(!dodgeroll){
+  dodgeroll = true;
+  if(left){
+    circlex -= 10;
+    
   }
-}
+  if(right){
+    circlex += 10;
+  }
   
+
+}
+}
+if(time > dodgedelay + 1000){
+  dodgeroll = !dodgeroll;
+}
+  }  
 
   
   public void combometer(){
