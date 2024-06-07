@@ -94,9 +94,11 @@ if(keyboardkey[(int)'l']){
   if(left){
     circlex -= 10;
     
+    
   }
   if(right){
     circlex += 10;
+   
   }
   
 
