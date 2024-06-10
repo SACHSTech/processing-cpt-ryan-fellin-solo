@@ -7,7 +7,7 @@ public class Sketch extends PApplet {
   ArrayList<Obstacle> obstaclegen = new ArrayList<Obstacle>();
   PImage player;
   float spawnpointx = 100;
-  float spawnpointy = 400;
+  float spawnpointy = 480;
   float circley;
   float circlex;
   float playerlength = 20;
@@ -55,9 +55,9 @@ public class Sketch extends PApplet {
     obstaclegen.add(new Obstacle(0, 0, 20, height));
     obstaclegen.add(new Obstacle(width-20, 150, 20, height-20));
     obstaclegen.add(new Obstacle(700, 450, 300, 600));
-    obstaclegen.add(new Obstacle(200, 100, 20, 20));
+    obstaclegen.add(new Obstacle(600, 250, 200, 0));
+    obstaclegen.add(new Obstacle(0, 400, 200, 20));
     obstaclegen.add(new Obstacle(200, 200, 20, 20));
-    obstaclegen.add(new Obstacle(100, 200, 20, 20));
     obstaclegen.add(new Obstacle(400, 550, 200, 300));
     obstaclegen.add(new Obstacle(0, 600, 300, 300));
   }
