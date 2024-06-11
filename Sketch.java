@@ -6,6 +6,7 @@ import processing.core.PImage;
 public class Sketch extends PApplet {
   ArrayList<Obstacle> obstaclegen = new ArrayList<Obstacle>();
   PImage player;
+  PImage titlescreen;
   float spawnpointx = 100;
   float spawnpointy = 480;
   float circley;
@@ -18,6 +19,8 @@ public class Sketch extends PApplet {
   float startDash;
   float dashTime;
   float dashSpeed;
+  int level = 1;
+  int platforms;
   double grav = (float) 0.5;
   boolean[] keyboardkey = new boolean[255];
   boolean jumping = false;
@@ -46,26 +49,28 @@ public class Sketch extends PApplet {
    * values here i.e background, stroke, fill etc.
    */
   public void setup() {
-    background(210, 255, 173);
+    
+    pushMatrix();
+    titlescreen = loadImage("titlescreen800.png");
+    
+    
+    popMatrix();
+    
+    
+    
     player = loadImage("80X20PLACEHOLDER.png");
     circlex = spawnpointx;
     circley = spawnpointy;
-    obstaclegen.add(new Obstacle(0, 0, width, 20));
-    //obstaclegen.add(new Obstacle(0, width-20, width, 20));
-    obstaclegen.add(new Obstacle(0, 0, 20, height));
-    obstaclegen.add(new Obstacle(width-20, 150, 20, height-20));
-    obstaclegen.add(new Obstacle(700, 450, 300, 600));
-    obstaclegen.add(new Obstacle(600, 250, 200, 0));
-    obstaclegen.add(new Obstacle(0, 400, 200, 20));
-    obstaclegen.add(new Obstacle(200, 200, 20, 20));
-    obstaclegen.add(new Obstacle(400, 550, 200, 300));
-    obstaclegen.add(new Obstacle(0, 600, 300, 300));
+    level();
+   
   }
 
   /**
    * Called repeatedly, anything drawn to the screen goes here
    */
   public void draw() {
+    
+   
     //vely = (vely + 1);
     background(210, 255, 173);
     image(player, circlex, circley); circlex = circlex + velx;
@@ -74,7 +79,7 @@ public class Sketch extends PApplet {
     
     
     
-    for (int i = 0; i < obstaclegen.size(); i++) {
+    for (int i = 0; i < obstaclegen.size() ; i++) {
     
       //check collision for this obstacle
       Obstacle Obstacle = obstaclegen.get(i);
@@ -101,6 +106,12 @@ public class Sketch extends PApplet {
       if(circley > height){
         circlex = spawnpointx;
         circley = spawnpointy;
+      }
+      if (circlex > width || circlex < 0) {
+      System.out.println("nextlevel");
+      level++;
+      level();
+  
       }
      
       fill(255, 0, 0);
@@ -200,7 +211,55 @@ public class Sketch extends PApplet {
     */
   }
 
-  public void combometer() {
+  public void level() {
+    if(level == 1){
+      obstaclegen.add(new Obstacle(0, 0, width, 20));
+      //obstaclegen.add(new Obstacle(0, width-20, width, 20));
+      obstaclegen.add(new Obstacle(0, 0, 20, height));
+      obstaclegen.add(new Obstacle(width-20, 150, 20, height-20));
+      obstaclegen.add(new Obstacle(700, 450, 300, 600));
+      obstaclegen.add(new Obstacle(600, 250, 200, 0));
+      obstaclegen.add(new Obstacle(0, 400, 200, 20));
+      obstaclegen.add(new Obstacle(0, 300, 100, 20));
+      obstaclegen.add(new Obstacle(400, 550, 200, 300));
+      obstaclegen.add(new Obstacle(0, 600, 300, 300));
+      obstaclegen.add(new Obstacle(0, 0, 0 , 1));
+    }
+    if(level == 2 ){
+      obstaclegen.clear();
+      obstaclegen.add(new Obstacle(0, 0, width, 20));
+    obstaclegen.add(new Obstacle(400, width-100, width, 40));
+    obstaclegen.add(new Obstacle(0, 200, 25, height));
+    obstaclegen.add(new Obstacle(width-20, 0, 20, height));
+    obstaclegen.add(new Obstacle(0, 600, 200, 50));
+    obstaclegen.add(new Obstacle(500, width-300, width, 40));
+    obstaclegen.add(new Obstacle(0, 400, 200, 50));
+    obstaclegen.add(new Obstacle(500, width-500, width, 40));
+    obstaclegen.add(new Obstacle(0, 800, 200, 50));
+     
+    spawnpointx = 600;
+    spawnpointy = 600;
+    circlex = spawnpointx;
+    circley = spawnpointy;
+    }
+    if(level == 3 ){
+      obstaclegen.clear();
+      obstaclegen.add(new Obstacle(0, 0, width, 20));
+    obstaclegen.add(new Obstacle(0, width-20, width, 20));
+    obstaclegen.add(new Obstacle(0, 0, 20, height));
+    obstaclegen.add(new Obstacle(width-20, 150, 20, height-20));
+    circlex = 200;
+    circley = 00;
+    }
+    if(level == 4 ){
+      obstaclegen.clear();
+      obstaclegen.add(new Obstacle(0, 0, width, 20));
+    obstaclegen.add(new Obstacle(0, width-20, width, 20));
+    obstaclegen.add(new Obstacle(0, 0, 20, height));
+    obstaclegen.add(new Obstacle(width-20, 150, 20, height-20));
+    circlex = 200;
+    circley = 300;
+    }
 
   }
 
