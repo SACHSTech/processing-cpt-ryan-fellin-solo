@@ -34,7 +34,6 @@ public class Sketch extends PApplet {
   long time = System.currentTimeMillis();
   int dodgedelay = 3000;
 
-
   /**
    * Called once at the beginning of execution, put your size all in this method
    */
@@ -49,119 +48,109 @@ public class Sketch extends PApplet {
    * values here i.e background, stroke, fill etc.
    */
   public void setup() {
-    
+
     pushMatrix();
     titlescreen = loadImage("titlescreen800.png");
-    
-    
+
     popMatrix();
-    
-    
-    
+
     player = loadImage("80X20PLACEHOLDER.png");
     circlex = spawnpointx;
     circley = spawnpointy;
     level();
-   
+
   }
 
   /**
    * Called repeatedly, anything drawn to the screen goes here
    */
   public void draw() {
-    
-   
-    //vely = (vely + 1);
+
+    // vely = (vely + 1);
     background(210, 255, 173);
-    image(player, circlex, circley); circlex = circlex + velx;
+    image(player, circlex, circley);
+    circlex = circlex + velx;
     circlex = circlex + velx;
     circley = circley + vely;
-    
-    
-    
-    for (int i = 0; i < obstaclegen.size() ; i++) {
-    
-      //check collision for this obstacle
+
+    for (int i = 0; i < obstaclegen.size(); i++) {
+
+      // check collision for this obstacle
       Obstacle Obstacle = obstaclegen.get(i);
       System.out.println(obstaclegen.get(i));
-      if(circlex + playerlength + 10 + velx > Obstacle.x  && circlex + velx < Obstacle.x + Obstacle.obstw && circley + playerwidth > Obstacle.y && circley < Obstacle.y + Obstacle.obsth){
+      if (circlex + playerlength + 10 + velx > Obstacle.x && circlex + velx < Obstacle.x + Obstacle.obstw
+          && circley + playerwidth > Obstacle.y && circley < Obstacle.y + Obstacle.obsth) {
         velx = 0;
-        
-        if(left){
+
+        if (left) {
           circlex = Obstacle.x + Obstacle.obstw;
-         
+
         }
-        if(right){
-          circlex = Obstacle.x - 50 ;  
+        if (right) {
+          circlex = Obstacle.x - 50;
         }
+
       }
-      if(circlex + playerlength > Obstacle.x && circlex < Obstacle.x + Obstacle.obstw  && circley + playerwidth + vely > Obstacle.y  && circley + vely < Obstacle.y + Obstacle.obsth ){
+      if (circlex + playerlength > Obstacle.x && circlex < Obstacle.x + Obstacle.obstw
+          && circley + playerwidth + vely > Obstacle.y && circley + vely < Obstacle.y + Obstacle.obsth) {
         vely = 0;
-        
-        
-       
-       touchingGround = true;
+
+        touchingGround = true;
       }
-     
-      if(circley > height){
+
+      if (circley > height) {
         circlex = spawnpointx;
         circley = spawnpointy;
       }
       if (circlex > width || circlex < 0) {
-      System.out.println("nextlevel");
-      level++;
-      level();
-  
+        System.out.println("nextlevel");
+        level++;
+        level();
+
       }
-     
+
       fill(255, 0, 0);
 
-      rect(Obstacle.x, Obstacle.y, Obstacle.obstw, Obstacle.obsth );
+      rect(Obstacle.x, Obstacle.y, Obstacle.obstw, Obstacle.obsth);
     }
-   
-    if(touchingGround){
-      vely=0;
+
+    if (touchingGround) {
+      vely = 0;
       jumping = false;
-    }
-    else{
+    } else {
       vely = vely + 1;
     }
-    
-   //player();
-    
+
+    // player();
 
     // sample code, delete this stuff
-   // ellipse(width / 2, height - 20, 50, 50);
+    // ellipse(width / 2, height - 20, 50, 50);
 
-  
-
-  // define other methods down here.
-  /*
-  public void player() {
-    // vely = vely + 1;F
-    image(player, circlex, circley);
-    while (whileloop) {
-      
-    }
-
-    
-    circlex = circlex + velx;
-    circley = circley + vely;
-    // lower edge collision detection
-    
-    if (circley > height) {
-    
-      vely = 0;
-
-      jumping = false;
-
-    }
-  
-    
-    
-   */
-
-    
+    // define other methods down here.
+    /*
+     * public void player() {
+     * // vely = vely + 1;F
+     * image(player, circlex, circley);
+     * while (whileloop) {
+     * 
+     * }
+     * 
+     * 
+     * circlex = circlex + velx;
+     * circley = circley + vely;
+     * // lower edge collision detection
+     * 
+     * if (circley > height) {
+     * 
+     * vely = 0;
+     * 
+     * jumping = false;
+     * 
+     * }
+     * 
+     * 
+     * 
+     */
 
     if (keyboardkey[(int) 'w']) {
       System.out.println("w pressed");
@@ -169,7 +158,7 @@ public class Sketch extends PApplet {
         jumping = true;
         touchingGround = false;
         vely = (vely = (-15));
-        
+
       }
 
     }
@@ -197,68 +186,79 @@ public class Sketch extends PApplet {
 
         }
         if (right) {
-          velx= 20;
+          velx = 20;
           vely = 0;
 
         }
 
       }
     }
-    /* 
-    if (time > dodgedelay + 1000) {
-      dodgeroll = !dodgeroll;
-    }
-    */
+    /*
+     * if (time > dodgedelay + 1000) {
+     * dodgeroll = !dodgeroll;
+     * }
+     */
   }
 
   public void level() {
-    if(level == 1){
+    if (level == 1) {
       obstaclegen.add(new Obstacle(0, 0, width, 20));
-      //obstaclegen.add(new Obstacle(0, width-20, width, 20));
+      // obstaclegen.add(new Obstacle(0, width-20, width, 20));
       obstaclegen.add(new Obstacle(0, 0, 20, height));
-      obstaclegen.add(new Obstacle(width-20, 150, 20, height-20));
+      obstaclegen.add(new Obstacle(width - 20, 150, 20, height - 20));
       obstaclegen.add(new Obstacle(700, 450, 300, 600));
       obstaclegen.add(new Obstacle(600, 250, 200, 0));
       obstaclegen.add(new Obstacle(0, 400, 200, 20));
       obstaclegen.add(new Obstacle(0, 300, 100, 20));
       obstaclegen.add(new Obstacle(400, 550, 200, 300));
       obstaclegen.add(new Obstacle(0, 600, 300, 300));
-      obstaclegen.add(new Obstacle(0, 0, 0 , 1));
+      obstaclegen.add(new Obstacle(0, 0, 0, 1));
     }
-    if(level == 2 ){
+    if (level == 2) {
       obstaclegen.clear();
       obstaclegen.add(new Obstacle(0, 0, width, 20));
-    obstaclegen.add(new Obstacle(400, width-100, width, 40));
-    obstaclegen.add(new Obstacle(0, 200, 25, height));
-    obstaclegen.add(new Obstacle(width-20, 0, 20, height));
-    obstaclegen.add(new Obstacle(0, 600, 200, 50));
-    obstaclegen.add(new Obstacle(500, width-300, width, 40));
-    obstaclegen.add(new Obstacle(0, 400, 200, 50));
-    obstaclegen.add(new Obstacle(500, width-500, width, 40));
-    obstaclegen.add(new Obstacle(0, 800, 200, 50));
-     
-    spawnpointx = 600;
-    spawnpointy = 600;
-    circlex = spawnpointx;
-    circley = spawnpointy;
+      obstaclegen.add(new Obstacle(400, width - 100, width, 40));
+      obstaclegen.add(new Obstacle(0, 250, 25, height));
+      obstaclegen.add(new Obstacle(width - 20, 0, 20, height));
+      obstaclegen.add(new Obstacle(0, 600, 200, 50));
+      obstaclegen.add(new Obstacle(500, width - 300, width, 40));
+      obstaclegen.add(new Obstacle(0, 400, 200, 50));
+      obstaclegen.add(new Obstacle(500, width - 500, width, 40));
+      obstaclegen.add(new Obstacle(0, 800, 200, 50));
+
+      spawnpointx = 600;
+      spawnpointy = 600;
+      circlex = spawnpointx;
+      circley = spawnpointy;
     }
-    if(level == 3 ){
+    if (level == 3) {
       obstaclegen.clear();
       obstaclegen.add(new Obstacle(0, 0, width, 20));
-    obstaclegen.add(new Obstacle(0, width-20, width, 20));
-    obstaclegen.add(new Obstacle(0, 0, 20, height));
-    obstaclegen.add(new Obstacle(width-20, 150, 20, height-20));
-    circlex = 200;
-    circley = 00;
+      obstaclegen.add(new Obstacle(0, width - 20, width, 20));
+      obstaclegen.add(new Obstacle(0, 0, 20, height));
+      obstaclegen.add(new Obstacle(width - 20, 0, 20, height - 20));
+      obstaclegen.add(new Obstacle(0, width - 500, width, 20));
+      obstaclegen.add(new Obstacle(0, width - 350, width, 20));
+      obstaclegen.add(new Obstacle(0, width - 200, width, 20));
+      obstaclegen.add(new Obstacle(0, width - 600, width, 20));
+      spawnpointx = 600;
+      spawnpointy = 100;
+      circlex = spawnpointx;
+      circley = spawnpointy;
     }
-    if(level == 4 ){
+    if (level == 4) {
       obstaclegen.clear();
       obstaclegen.add(new Obstacle(0, 0, width, 20));
-    obstaclegen.add(new Obstacle(0, width-20, width, 20));
-    obstaclegen.add(new Obstacle(0, 0, 20, height));
-    obstaclegen.add(new Obstacle(width-20, 150, 20, height-20));
-    circlex = 200;
-    circley = 300;
+      obstaclegen.add(new Obstacle(0, width - 20, width, 20));
+      obstaclegen.add(new Obstacle(0, 0, 20, height));
+      obstaclegen.add(new Obstacle(width, 150, 20, height - 20));
+      
+      circlex = 200;
+      circley = 300;
+    }
+    if(level == 5){
+      obstaclegen.clear();
+      text("butakam", 400, 400);
     }
 
   }
@@ -272,38 +272,23 @@ public class Sketch extends PApplet {
   }
 
   public void keyReleased() {
-    if((int) key == 'l'){
-    dodgeroll = false;
-    velx = 0;
-    }
-    if((int)key == 'w'){
-      
-      
-      
-    }
-    if((int)key == 'a'){
+    if ((int) key == 'l') {
+      dodgeroll = false;
       velx = 0;
     }
-    if((int)key == 'd'){
+    if ((int) key == 'w') {
+
+    }
+    if ((int) key == 'a') {
+      velx = 0;
+    }
+    if ((int) key == 'd') {
       velx = 0;
     }
     if ((int) key != 65535) {
       keyboardkey[(int) key] = false;
     }
-  
+
   }
-  
-}
-class Obstacle{
-  float x;
-  float y;
-  float obsth;
-  float obstw;
-  
-  public Obstacle(float obstx, float obsty, float obstwidth, float obstheight){
-    this.x = obstx;
-    this.y = obsty;
-    this.obstw = obstwidth;
-    this.obsth = obstheight;
-  }
+
 }
