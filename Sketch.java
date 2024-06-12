@@ -57,7 +57,7 @@ public class Sketch extends PApplet {
 
     popMatrix();
 
-    player = loadImage("80X20PLACEHOLDER.png");
+    player = loadImage("caveexplorer40x80.png");
     circlex = spawnpointx;
     circley = spawnpointy;
     level();
@@ -80,7 +80,7 @@ public class Sketch extends PApplet {
 
       // check collision for this obstacle
       Obstacle Obstacle = obstaclegen.get(i);
-      //System.out.println(obstaclegen.get(i));
+      // System.out.println(obstaclegen.get(i));
       if (circlex + playerlength + 10 + velx > Obstacle.x && circlex + velx < Obstacle.x + Obstacle.obstw
           && circley + playerwidth > Obstacle.y && circley < Obstacle.y + Obstacle.obsth) {
         velx = 0;
@@ -100,7 +100,7 @@ public class Sketch extends PApplet {
 
         touchingGround = true;
       }
-      
+
       if (circley > height) {
         circlex = spawnpointx;
         circley = spawnpointy;
@@ -120,14 +120,12 @@ public class Sketch extends PApplet {
     if (touchingGround) {
       vely = 0;
       jumping = false;
-      //circley =  circley - 10;
+      // circley = circley - 10;
     }
-    
-    else if(!touchingGround){
+
+    else if (!touchingGround) {
       vely = vely + 1;
     }
-    
-    
 
     // player();
 
@@ -166,7 +164,6 @@ public class Sketch extends PApplet {
         jumping = true;
         touchingGround = false;
         vely = (vely = (-15));
-        
 
       }
 
@@ -182,12 +179,11 @@ public class Sketch extends PApplet {
       velx = 6;
       left = false;
       right = true;
-      
+
     }
-   if (keyboardkey[(int)'s']){
-      touchingGround = false
-      ;
-   }
+    if (keyboardkey[(int) 's']) {
+      touchingGround = false;
+    }
 
     if (keyboardkey[(int) 'l']) {
       System.out.println("dodgeroll");
@@ -215,13 +211,12 @@ public class Sketch extends PApplet {
   }
 
   public void level() {
-    if(level == 0){
+    if (level == 0) {
       obstaclegen.add(new Obstacle(0, width - 20, width, 20));
-      
-      
+
     }
     if (level == 1) {
-      backgroundnum =  1;
+      backgroundnum = 1;
       obstaclegen.add(new Obstacle(0, 0, width, 20));
       // obstaclegen.add(new Obstacle(0, width-20, width, 20));
       obstaclegen.add(new Obstacle(0, 0, 20, height));
@@ -233,7 +228,7 @@ public class Sketch extends PApplet {
       obstaclegen.add(new Obstacle(400, 550, 200, 300));
       obstaclegen.add(new Obstacle(0, 600, 300, 300));
       obstaclegen.add(new Obstacle(0, 0, 0, 1));
-      
+
       circlex = spawnpointx;
       circley = spawnpointy;
     }
@@ -250,25 +245,25 @@ public class Sketch extends PApplet {
       obstaclegen.add(new Obstacle(0, 800, 200, 50));
 
       spawnpointx = 600;
-      //velx = 0;
-      //vely = 0;
+      // velx = 0;
+      // vely = 0;
       spawnpointy = 600;
       circlex = spawnpointx;
       circley = spawnpointy;
     }
     if (level == 3) {
       obstaclegen.clear();
-      //obstaclegen.add(new Obstacle(0, 0, width, 20));
+      // obstaclegen.add(new Obstacle(0, 0, width, 20));
       obstaclegen.add(new Obstacle(0, width - 20, width, 20));
       obstaclegen.add(new Obstacle(0, 0, 20, height));
       obstaclegen.add(new Obstacle(width - 20, -120, 20, height - 20));
       obstaclegen.add(new Obstacle(100, width - 500, width, 20));
-      obstaclegen.add(new Obstacle(- 100, width - 350, width, 20));
+      obstaclegen.add(new Obstacle(-100, width - 350, width, 20));
       obstaclegen.add(new Obstacle(100, width - 200, width, 20));
       obstaclegen.add(new Obstacle(-100, width - 650, width, 20));
       spawnpointx = 100;
-      //velx = 0;
-      //vely = 0;
+      // velx = 0;
+      // vely = 0;
       spawnpointy = 50;
       circlex = spawnpointx;
       circley = spawnpointy;
@@ -278,32 +273,32 @@ public class Sketch extends PApplet {
       obstaclegen.add(new Obstacle(0, 0, width, 20));
       obstaclegen.add(new Obstacle(0, width - 20, width, 20));
       obstaclegen.add(new Obstacle(0, 0, 20, height));
-      obstaclegen.add(new Obstacle(width-20, -150, 20, height - 20));
+      obstaclegen.add(new Obstacle(width - 20, -150, 20, height - 20));
       obstaclegen.add(new Obstacle(400, 200, 20, height));
       obstaclegen.add(new Obstacle(200, width - 100, 400, 20));
       obstaclegen.add(new Obstacle(0, width - 200, 100, 20));
       obstaclegen.add(new Obstacle(200, width - 300, 400, 20));
       obstaclegen.add(new Obstacle(0, width - 400, 100, 20));
       obstaclegen.add(new Obstacle(200, width - 500, 400, 20));
-      obstaclegen.add(new Obstacle(height- 100, width - 400, 100, 20));
-      obstaclegen.add(new Obstacle(height- 100, width - 200, 100, 20));
+      obstaclegen.add(new Obstacle(height - 100, width - 400, 100, 20));
+      obstaclegen.add(new Obstacle(height - 100, width - 200, 100, 20));
 
       spawnpointx = 100;
-      //velx = 0;
-      //vely = 0;
+      // velx = 0;
+      // vely = 0;
       spawnpointy = 650;
       circlex = spawnpointx;
       circley = spawnpointy;
       touchingGround = false;
     }
-    if(level == 5){
+    if (level == 5) {
       obstaclegen.clear();
       background(GRAY);
       textSize(60);
       text("You Escaped the Great Cave!", 0, 400);
       textSize(56);
       text("Thank you for playing", 130, 500);
-      
+
       stop();
     }
 
@@ -336,11 +331,12 @@ public class Sketch extends PApplet {
     }
 
   }
-  public void backgroundphoto(){
-    if(backgroundnum == 0){
+
+  public void backgroundphoto() {
+    if (backgroundnum == 0) {
       background(titlescreen);
     }
-    if(backgroundnum == 1){
+    if (backgroundnum == 1) {
       background(backgroundpic);
     }
   }
