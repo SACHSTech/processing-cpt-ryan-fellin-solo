@@ -1,3 +1,11 @@
+/**
+ * @author Ryan
+ * This class defines how the obstacle values behave, determining various parameters of the obstacle
+ * @param obstx X Co-Ordinate of the Obstacle
+ * @param obsty Y Co-Ordinate of the Obstacle
+ * @param obstwidth Width of the Obstacle
+ * @param obstheight Height of the Obstacle
+ */
 public class Obstacle {
     
         float x;

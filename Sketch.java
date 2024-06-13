@@ -2,8 +2,18 @@ import java.sql.Time;
 import java.util.ArrayList;
 import processing.core.PApplet;
 import processing.core.PImage;
+/**
+ * Great Cave Escape, a Celeste-Style platformer created by Ryan Fellin
+ * @author Ryan Fellin
+ * This game follows our Cave Explorer as he attempts to escape the challenges of the Great Cave
+ * The command line consistently prints the status of pressed keys and object collision
+ */
 
 public class Sketch extends PApplet {
+  /**
+   * Variables are defined here
+   *  CircleX and CircleY correspond to the position of the player character, this is a rollover from a previous project in which this movement system was used
+   * */
   ArrayList<Obstacle> obstaclegen = new ArrayList<Obstacle>();
   PImage player;
   PImage titlescreen;
@@ -49,6 +59,7 @@ public class Sketch extends PApplet {
   /**
    * Called once at the beginning of execution. Add initial set up
    * values here i.e background, stroke, fill etc.
+   * Image files are loaded
    */
   public void setup() {
     backgroundpic = loadImage("cave.png");
@@ -66,6 +77,9 @@ public class Sketch extends PApplet {
 
   /**
    * Called repeatedly, anything drawn to the screen goes here
+   * draw() method also handles collision detection and the Character Velocity movement engine
+   * Character Velocity Movement engine handles movement by velocity, jumping, and dashing
+   * Also handles the KeyboardKey Array, allowing for multi-key inputs
    */
   public void draw() {
 
@@ -126,7 +140,10 @@ public class Sketch extends PApplet {
     else if (!touchingGround) {
       vely = vely + 1;
     }
-
+    /**
+     * @deprecated
+     * The Player() method has been deprecated in favor of a more condensed movement system, ignore.
+     */
     // player();
 
     // sample code, delete this stuff
@@ -203,19 +220,18 @@ public class Sketch extends PApplet {
 
       }
     }
-    /*
-     * if (time > dodgedelay + 1000) {
-     * dodgeroll = !dodgeroll;
-     * }
-     */
+    
   }
-
+  /**
+   * Determines the level number, and initializes the required obstacles for each level
+   */
   public void level() {
     if (level == 0) {
       obstaclegen.add(new Obstacle(0, width - 20, width, 20));
 
     }
     if (level == 1) {
+      obstaclegen.clear();
       backgroundnum = 1;
       obstaclegen.add(new Obstacle(0, 0, width, 20));
       // obstaclegen.add(new Obstacle(0, width-20, width, 20));
@@ -303,8 +319,12 @@ public class Sketch extends PApplet {
     }
 
   }
-
-  // Thanks to Caleb for the help with keyboard input using arrays!
+  /**
+   * In using the keyboardkey[] array, we can bypass the 1 key limitation of the standard keyPressed and keyReleased system
+   * Each key has its own corresponding boolean value, special keys (ctrl, alt, shift, tab) appear as '65535' and are ignored
+   * Thanks to Caleb for the help with keyboard input using arrays!
+   */
+  
   public void keyPressed() {
     if ((int) key != 65535) {
       keyboardkey[(int) key] = true;
@@ -331,7 +351,9 @@ public class Sketch extends PApplet {
     }
 
   }
-
+  /**
+   * Determines the background image, with the title screen appearing on the first page
+   */
   public void backgroundphoto() {
     if (backgroundnum == 0) {
       background(titlescreen);
